@@ -18,34 +18,38 @@ class GameTest(unittest.TestCase):
         self.assertEqual(self.spaceship_test.state(), "Destroyed")
         print("Test 0 completed")
 
+    def test1_no_model(self):
+        with self.assertRaises(ValueError):
+            Spaceship("C", -1)
+        print("Test 1 completed")
     
-    def test1_create_spaceship(self):
+    def test2_create_spaceship(self):
         resp = app.test_client().post(self.SPACESHIPS_URL,
                            json = self.spaceship_test.serialize())
         self.assertEqual(resp.status_code, 200)
-        print("Test 1 completed")
+        print("Test 2 completed")
 
 
-    def test2_get_spaceship(self):
+    def test3_get_spaceship(self):
         resp = app.test_client().get(self.SPACESHIPS_URL + self.spaceship_name)
         self.assertEqual(resp.status_code, 200)
         self.assertDictEqual(json.loads(resp.data), self.expected_spaceship_test)
-        print("Test 2 completed")
+        print("Test 3 completed")
 
-    def test3_get_spaceships(self):
+    def test4_get_spaceships(self):
         resp = app.test_client().get(self.SPACESHIPS_URL)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(json.loads(resp.data)), 2)
-        print("Test 3 completed")
-
-    def test4_spaceship_battle(self):
-        self.assertTrue(self.spaceship_test2.protection())
-        self.spaceship_test.battle(self.spaceship_test2)
-        self.assertFalse(self.spaceship_test2.protection())
-        self.spaceship_test.battle(self.spaceship_test2)
-        self.assertEqual(self.spaceship_test2.health,5)
-        self.assertTrue(self.spaceship_test2.protection())
         print("Test 4 completed")
+
+    def test5_spaceship_battle(self):
+        self.assertTrue(self.spaceship_test.protection())
+        self.spaceship_test2.battle(self.spaceship_test)
+        self.assertFalse(self.spaceship_test.protection())
+        self.spaceship_test2.battle(self.spaceship_test)
+        self.assertEqual(self.spaceship_test.health,0)
+        self.assertFalse(self.spaceship_test.protection())
+        print("Test 5 completed")
 
 
 if __name__=="__main__":

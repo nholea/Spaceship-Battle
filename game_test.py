@@ -51,6 +51,14 @@ class GameTest(unittest.TestCase):
         self.assertFalse(self.spaceship_test.protection())
         print("Test 5 completed")
 
+    def test6_no_spaceship_battle(self):
+        self.assertTrue(self.spaceship_test2.protection())
+        self.spaceship_test.battle(self.spaceship_test2)
+        self.assertTrue(self.spaceship_test.protection())
+        self.spaceship_test.battle(self.spaceship_test2)
+        self.assertEqual(self.spaceship_test2.health,6)
+        print("Test 6 completed")
+
 
 if __name__=="__main__":
     unittest.main()

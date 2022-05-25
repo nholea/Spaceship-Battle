@@ -34,12 +34,14 @@ def battle(spaceship_name):
         spaceship for spaceship in spaceships if spaceship.name == spaceship_name]
     if (len(spaceship_found) > 0):
         attacking_spaceship = [spaceship for spaceship in spaceships if spaceship != spaceship_found[0]]
-        if spaceship_found[0].protection():
-            attacking_spaceship[0].battle(spaceship_found[0])
-            return jsonify({"Message":  attacking_spaceship[0].name + " shot " + spaceship_found[0].name, "Protection": "Activated" if spaceship_found[0].protection() else "Deleted"})
-        else:
-            attacking_spaceship[0].battle(spaceship_found[0])
-            return jsonify({"Message":  attacking_spaceship[0].name + " shot " + spaceship_found[0].name + " again", "Health": spaceship_found[0].health})
+        if attacking_spaceship[0].health > 0 :
+            if spaceship_found[0].protection():
+                attacking_spaceship[0].battle(spaceship_found[0])
+                return jsonify({"Message":  attacking_spaceship[0].name + " shot " + spaceship_found[0].name, "Protection": "Activated" if spaceship_found[0].protection() else "Deleted"})
+            else:
+                attacking_spaceship[0].battle(spaceship_found[0])
+                return jsonify({"Message":  attacking_spaceship[0].name + " shot " + spaceship_found[0].name + " again", "Health": spaceship_found[0].health})
+        return jsonify ({"Health": attacking_spaceship[0].health, "Message":  attacking_spaceship[0].name + " is destroyed. Can't shoot"})        
     return jsonify({"message": "Customer Not Found!"})
 
 

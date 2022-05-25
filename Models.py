@@ -2,7 +2,7 @@ class Spaceship():
     __protection = True
 
     def __init__(self, name, health):
-        if type(health) == int and health >=0:
+        if type(health) == int and health >= 0:
             self.name=name
             self.health = health
         else:
@@ -24,12 +24,12 @@ class Spaceship():
         return self.__protection
 
     def battle(self, spaceship):
-        if spaceship.protection():
-            spaceship.remove_protection()
-        else:
-            if spaceship.health >0:
-                spaceship.health -= 1
-                spaceship.active_protection()
-        
-
+        if self.health > 0:
+            if spaceship.protection():
+                spaceship.remove_protection()
+            else:
+                if spaceship.health > 0:
+                    spaceship.health -= 1
+                    spaceship.active_protection()
 spaceships = []
+

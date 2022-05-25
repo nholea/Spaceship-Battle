@@ -40,11 +40,8 @@ def battle(spaceship_name):
         else:
             spaceship_found[0].name =  spaceship_found[0].name
             spaceship_found[0].health = spaceship_found[0].health - 1
-
             spaceship_found[0].active_protection()
             return jsonify({"Message":  attacking_spaceship[0].name + " shot " + spaceship_found[0].name + " again", "Health": spaceship_found[0].health})
-
-        
     return jsonify({"message": "Customer Not Found!"})
 
 

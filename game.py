@@ -40,7 +40,7 @@ def shoot_at(attacker_name, target_name):
         attacker for attacker in spaceships if attacker.name == attacker_name]
     if (len(target_spaceship) > 0 and len(attacking_spaceship) > 0):
         attacking_spaceship[0].shoot_at(target_spaceship[0])
-        return jsonify({"Message":  attacking_spaceship[0].name + " shot " + target_spaceship[0].name, "Health": target_spaceship[0].health})
+        return jsonify({"Message":  attacking_spaceship[0].name + " shot " + target_spaceship[0].name, "Health": target_spaceship[0].health, "Power": "Power not used by " + attacking_spaceship[0].name + " : " + str(attacking_spaceship[0].power_not_in_use)})
     return jsonify({"message": "Spaceship Not Found!"})
 
 

@@ -49,12 +49,11 @@ def update_weapon_power_consumed(spaceship_name):
     spaceship_found = [
         spaceship for spaceship in spaceships if spaceship.name == spaceship_name]
     if (len(spaceship_found) > 0):
-        spaceship_found[0].name = spaceship_found[0].name
-        spaceship_found[0].health = spaceship_found[0].health
-        spaceship_found[0].weapon.weapon_power_needed = spaceship_found[0].weapon.weapon_power_needed
-        spaceship_found[0].weapon.power_consumed_by_weapon = request.json["power consumed"]
-        spaceship_found[0].generator = spaceship_found[0].generator
-        return jsonify({"message": "Weapon power consumed Updated", "customer": spaceship_found[0].serialize()})
+        if request.json["power consumed"] > 0 and request.json["power consumed"] <=spaceship_found[0].weapon.weapon_power_needed: 
+            spaceship_found[0].weapon.power_consumed_by_weapon = request.json["power consumed"]
+        else:
+            raise ValueError("Power consumed must be > 0 and <= Power needed")
+        return jsonify({"message": "Weapon power consumed Updated", "spaceship": spaceship_found[0].serialize()})
     return jsonify({"message": "Spaceship Not Found!"})
 
 

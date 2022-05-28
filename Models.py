@@ -61,33 +61,3 @@ class Spaceship():
             raise DestroyedSpaceship("The Spaceship is destroyed. Cannot shoot")
 
 spaceships = []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-holi = Spaceship("A", 0, Weapon(6,6),Generator(15))
-holi2 = Spaceship("A",5,Weapon(4,4),Generator(20))
-
-holi2.shoot_at(holi)
-print(holi2.power_not_in_use)
-
-
-
-
-
-
-
